@@ -1,0 +1,1 @@
+My learnings in implementing Google ADK against free models in Ollama. The exercises are from the "Google ADK Trainng Hub" at this location -> https://raphaelmansuy.github.io/adk_training/docs/overview
