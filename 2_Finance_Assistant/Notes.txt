@@ -1,0 +1,48 @@
+Run "ADk Web" in the Terminal
+Run http://localhost:8000. Once page loads, choose the "Finance_Assistant" agent
+
+Type below Prompt:
+If I invest $10,000 at 0.06 annual interest for 5 years, how much will I have?
+
+
+=> Understanding Tool Execution
+Open the Events tab in the Dev UI after sending a message. You'll see:
+
+User Message: Your original question
+Function Call Event: Shows which tool was called with what parameters
+Function Response Event: Shows what the tool returned
+Model Response: The final answer combining tool results with explanation
+This is incredibly powerful for debugging - you can see EXACTLY when and how tools are used!
+
+=> How It Works (Behind the Scenes)
+1. User sends message → ADK receives it
+2. ADK packages the message with:
+       Your agent's instructions
+       Tool schemas (generated from your function signatures)
+3. llama3.2 (LLM) decides: "Do I need a tool for this?"
+       YES → Returns a function call request
+       NO → Returns a text response
+4. If tool needed, ADK:
+       Executes your Python function with the parameters Gemini provided
+       Gets the return value
+       Sends it back to Gemini
+5. LLM generates final response using the tool result
+
+You never manually call tools - the LLM does it automatically!
+
+
+Best Practices
+DO:
+1. Write descriptive function names (calculate_compound_interest not calc_int)
+2. Include comprehensive docstrings
+3. Use type hints for all parameters
+4. Return structured dictionaries
+5. Handle errors gracefully
+6. Keep tools focused (one function = one task)
+
+DON'T:
+1. Use generic names (process_data, do_stuff)
+2. Rely on *args or **kwargs for LLM-facing parameters (they're ignored!)
+3. Return complex objects (stick to dicts, strings, numbers)
+4. Make tools that do too many things
+5. Forget to handle error cases
