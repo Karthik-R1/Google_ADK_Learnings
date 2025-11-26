@@ -1,0 +1,4 @@
+1. Run the program using "ADK Web"
+2. In the Browser, type the URL, http://127.0.0.1:8000
+3. Choose the "Chuck Norris Agent"
+4. Type a prompt, "Tell me a Chuck Norris Joke" and observe the result.
