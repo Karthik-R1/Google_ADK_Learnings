@@ -1,0 +1,8 @@
+=> A SequentialAgent is a type of "workflow agent" that runs a list of sub-agents one after another in a fixed, predefined order (deterministic)
+=> It is used for creating predictable, multi-step processes, such as a data pipeline where each step depends on the previous one.
+=> The output from one agent is automatically passed as the input to the next agent in the sequence via the built-in state management
+
+More:
+=> The output of one sub-agent is typically stored in a shared session state (using an output_key) and is then available as the input for the next agent in the sequence.
+=> Because the execution flow is hardcoded and not reliant on LLM decision-making for orchestration, it is easy to test, debug, and ensures consistent, repeatable outcomes.
+=> While the SequentialAgent follows the programmed sequence, the individual sub-agents it orchestrates may be powerful LLM agents or simple tool-calling agents
